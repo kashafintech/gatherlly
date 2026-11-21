@@ -81,4 +81,5 @@ app.include_router(events.router, prefix="/api/v1")
 app.include_router(registrations.router, prefix="/api/v1")
 
 # Static frontend for local development and the Vercel ASGI function.
-app.mount("/", StaticFiles(directory=str(FRONTEND_DIR), html=True), name="frontend-static")
+if FRONTEND_DIR.exists():
+    app.mount("/", StaticFiles(directory=str(FRONTEND_DIR), html=True), name="frontend-static")
